@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import GitHubUser from "./GitHubUser";
@@ -15,32 +14,32 @@ const Search = () => {
     const { getGithubUser } = useAuthStore();
 
     useEffect(() => {
-        axios
-            .get("https://api.github.com/users/aansourav")
-            .then((res) => {
-                setUser(res.data);
+        fetch("/api/users/aansourav")
+            .then((res) => res.json())
+            .then((data) => {
+                setUser(data);
                 setNoUserFound(false); // Ensure no "user not found" message shows on default user fetch
                 const userInfoArray = [
-                    { label: "Username", value: res.data.login },
-                    { label: "Public Repos", value: res.data.public_repos },
-                    { label: "Followers", value: res.data.followers },
-                    { label: "Following", value: res.data.following },
-                    { label: "Bio", value: res.data.bio },
-                    { label: "GitHub URL", value: res.data.html_url },
-                    { label: "Blog", value: res.data.blog },
-                    { label: "Location", value: res.data.location },
+                    { label: "Username", value: data.login },
+                    { label: "Public Repos", value: data.public_repos },
+                    { label: "Followers", value: data.followers },
+                    { label: "Following", value: data.following },
+                    { label: "Bio", value: data.bio },
+                    { label: "GitHub URL", value: data.html_url },
+                    { label: "Blog", value: data.blog },
+                    { label: "Location", value: data.location },
                     {
                         label: "Account Created",
-                        value: new Date(res.data.created_at).toDateString(),
+                        value: new Date(data.created_at).toDateString(),
                     },
                     {
                         label: "Last Updated",
-                        value: new Date(res.data.updated_at).toDateString(),
+                        value: new Date(data.updated_at).toDateString(),
                     },
-                    { label: "Type", value: res.data.type },
+                    { label: "Type", value: data.type },
                     {
                         label: "Hireable",
-                        value: res.data.hireable ? "Yes" : "No",
+                        value: data.hireable ? "Yes" : "No",
                     },
                 ];
                 setTotalPages(Math.ceil(userInfoArray.length / itemsPerPage));

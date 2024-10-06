@@ -9,6 +9,7 @@ export default defineConfig({
                 target: "https://api.github.com",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ""),
+                secure: false, // You can set this to false if you face SSL issues
             },
         },
     },
