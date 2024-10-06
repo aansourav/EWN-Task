@@ -48,7 +48,6 @@ const SignUpPage = () => {
     };
 
     const handleSignUp = async (e) => {
-        console.log(email, password, name, familyName, language);
         e.preventDefault();
 
         if (!validateForm()) return;

@@ -4,7 +4,6 @@ import { formatDate } from "../utils/date";
 
 const Profile = () => {
     const { user } = useAuthStore();
-    console.log(user);
 
     return (
         <motion.div
