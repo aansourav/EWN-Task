@@ -81,7 +81,6 @@ function App() {
                     path="/"
                     element={
                         <ProtectedRoute>
-                            {/* <Dashboard /> */}
                             <HomePage />
                         </ProtectedRoute>
                     }

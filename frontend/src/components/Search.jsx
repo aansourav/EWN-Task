@@ -16,9 +16,8 @@ const Search = () => {
 
     useEffect(() => {
         axios
-            .get("/api/users/aansourav")
+            .get("https://api.github.com/users/aansourav")
             .then((res) => {
-                console.log("User Data:", res.data);
                 setUser(res.data);
                 setNoUserFound(false); // Ensure no "user not found" message shows on default user fetch
                 const userInfoArray = [
