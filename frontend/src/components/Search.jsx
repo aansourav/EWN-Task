@@ -13,8 +13,49 @@ const Search = () => {
     const [isSearchAttempted, setIsSearchAttempted] = useState(false); // New state for tracking search attempts
     const { getGithubUser } = useAuthStore();
 
+    // useEffect(() => {
+    //     fetch("/api/users/aansourav")
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setUser(data);
+    //             setNoUserFound(false); // Ensure no "user not found" message shows on default user fetch
+    //             const userInfoArray = [
+    //                 { label: "Username", value: data.login },
+    //                 { label: "Public Repos", value: data.public_repos },
+    //                 { label: "Followers", value: data.followers },
+    //                 { label: "Following", value: data.following },
+    //                 { label: "Bio", value: data.bio },
+    //                 { label: "GitHub URL", value: data.html_url },
+    //                 { label: "Blog", value: data.blog },
+    //                 { label: "Location", value: data.location },
+    //                 {
+    //                     label: "Account Created",
+    //                     value: new Date(data.created_at).toDateString(),
+    //                 },
+    //                 {
+    //                     label: "Last Updated",
+    //                     value: new Date(data.updated_at).toDateString(),
+    //                 },
+    //                 { label: "Type", value: data.type },
+    //                 {
+    //                     label: "Hireable",
+    //                     value: data.hireable ? "Yes" : "No",
+    //                 },
+    //             ];
+    //             setTotalPages(Math.ceil(userInfoArray.length / itemsPerPage));
+    //         })
+    //         .catch((error) =>
+    //             console.error("Error fetching user data:", error)
+    //         );
+    // }, []);
+
     useEffect(() => {
-        fetch("/api/users/aansourav")
+        // Determine if we are in development mode or production
+        const apiUrl = import.meta.env.DEV
+            ? "/api/users/aansourav" // Proxy in development mode
+            : "https://api.github.com/users/aansourav"; // Directly hit GitHub API in production
+
+        fetch(apiUrl)
             .then((res) => res.json())
             .then((data) => {
                 setUser(data);
